@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 22:09:32 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/05 18:25:42 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/10 20:23:50 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ void				ft_alstadd(t_list **alst, t_list *new);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_putnubrs(int *mas, int len);
+int					ft_newstrdel(char **s);
 
 #endif
