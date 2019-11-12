@@ -6,33 +6,66 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/10 20:58:06 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/12 17:58:21 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "t_tetr_func.c"
+#include <stdio.h>
+
+void	ft_print(int *mas, int len)
+{
+	int i;
+
+	i = 0;
+	printf("{");
+	while (i < len)
+	{
+		printf("%d,", mas[i]);
+		i++;
+	}
+	printf("}\n");
+}
 
 int main(int ac, char **av)
 {
 	ac = 1;
 	int fd = open(av[1], O_RDONLY);
-	t_tetr *ptr = NULL;
+	
+	t_tetr	*ptr;
+	t_tetr	*tmp;
+	int num;
 
+	num = 1;
 	ptr = ft_newtetr(SIZE, COORD);
-	ptr->next = ft_newtetr(SIZE, COORD);
-	ft_putnbr(ft_definition(&ptr, fd));
-	ft_putchar('\n');
-	ft_putnubrs(ptr->line, SIZE);
-	ft_putchar('\n');
-	ft_putnubrs(ptr->coordinates, SIZE / 2);
+	// printf("%d", (ft_definition(&ptr, fd)));
+	while (ft_definition(&ptr, fd))
+	{
+		tmp = ptr;
+		ptr = ptr->next;
+		ptr = ft_newtetr(SIZE, COORD);
+		ptr->prev = tmp;
+	}
+	while (ptr->prev != NULL)
+	{
+		ft_print(ptr->coords, COORD);
+		ptr = ptr->prev;
+	}
+
+	// ptr->next = ft_newtetr(SIZE, COORD);
+	// ft_putnbr(ft_definition(&ptr, fd));
+	// ft_putchar('\n');
+	// ft_putnubrs(ptr->line, SIZE);
+	// ft_putchar('\n');
+	// ft_putnubrs(ptr->coords, SIZE / 2);
 
 	// ft_putnbr(ft_definition(&ptr->next, fd));
 	// ft_putchar('\n');
 	// ft_putnubrs(ptr->next->line, SIZE);
 	// ft_putchar('\n');
-	// ft_putnubrs(ptr->next->coordinates, SIZE);
-	// close(fd);
+	// ft_putnubrs(ptr->next->coords, SIZE);
+	close(fd);
 	return (1);
 }
 
@@ -96,16 +129,49 @@ int		ft_binarysquare(char *tetr, t_tetr **ptr)
 			(*ptr)->line[i * SIZE / 4 + j] = (*tetr == '.') ? 0 : 1;
 			if (*tetr != '.')
 			{
-				*((*ptr)->coordinates++) = j;
-				*((*ptr)->coordinates++) = i;
+				*((*ptr)->coords++) = j;
+				*((*ptr)->coords++) = i;
 			}
 			tetr = (*(tetr + 1) == '\n') ? tetr + 2: tetr + 1;
 			j++;
 		}
 		i++;
 	}
-	(*ptr)->coordinates = (*ptr)->coordinates - COORD;
+	(*ptr)->coords = (*ptr)->coords - COORD;
 	return (1);
+}
+
+int		ft_valid_tetr(t_tetr *inside)
+{
+	int		fd;
+	int		i;
+	int		flag;
+	t_tetr	*ptr;
+	t_tetr	*tmp;
+
+	fd = open(VALID, O_RDONLY);
+	ptr = ft_newtetr(SIZE, COORD);
+	while (ft_definition(&ptr, fd))
+	{
+		tmp = ptr;
+		ptr = ptr->next;
+		ptr = ft_newtetr(SIZE, COORD);
+		ptr->prev = tmp;
+	}
+	i = 0;
+	while (ptr!= NULL)
+	{
+		flag = 0;
+		while (i < COORD)
+		{
+			flag = (ptr->coords[i] == inside->coords[i]) ? flag++ : 0;
+			i++;
+		}
+		if (flag == COORD)
+			return (1);
+		ptr = ptr->prev;
+	}
+	return (-1);
 }
 
 int		ft_definition(t_tetr **ptr, int fd)
@@ -115,17 +181,18 @@ int		ft_definition(t_tetr **ptr, int fd)
 	int		num;
 
 	c = ft_strnew(SIZE_R);
-	if (read(fd, c, SIZE_R) < 0)
+	num = read(fd, c, SIZE_R);
+	if (num < 0)
 		return (ft_newstrdel(&c));
 	c[SIZE_R] = 0;
 	if (ft_validsquare(c) == -1)
 		return (ft_newstrdel(&c));
 	num = read(fd, &r, 1);
-	if (r != '\n')
+	if (r != '\n' && r != 0)
 		return (ft_newstrdel(&c));
 	if (ft_binarysquare(c, ptr) == -1)
 		return (ft_newstrdel(&c));
 	ft_newstrdel(&c);
-	(*ptr)->coordinates = ft_shift((*ptr)->coordinates);
+	(*ptr)->coords = ft_shift((*ptr)->coords);
 	return (num);
 }

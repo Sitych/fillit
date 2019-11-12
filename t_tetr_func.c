@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/10 20:28:46 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/12 17:52:48 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ t_tetr 	*ft_newtetr(int len, int crds)
 			free(ptr);
 			return (NULL);
 		}
-	ptr->coordinates = (int*)malloc(sizeof(int) * crds);
-	if (ptr->coordinates == NULL)
+	ptr->coords = (int*)malloc(sizeof(int) * crds);
+	if (ptr->coords == NULL)
 	{
 		free(ptr->line);
 		free(ptr);
 		return (NULL);
 	}
+	ptr->next = NULL;
+	ptr->prev = NULL;
 	return (ptr);
 }
