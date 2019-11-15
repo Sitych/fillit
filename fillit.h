@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/14 17:29:22 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/15 19:24:01 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # define COORD	8
 # define VALID	"valid_tetrominos"
 # define K(i, j) (i * SIZE / 4 + j * SIZE / 4)
-# define RIGHT
 
 // # define I		(int[8]) {0,0,0,1,0,2,0,3}
 // # define IH		(int[8]) {0,0,1,0,2,0,3,0}

@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/14 20:32:52 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/15 19:31:22 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ int main(int ac, char **av)
 	num = 1;
 	ptr = ft_newtetr(SIZE, COORD);
 	// printf("%d", (ft_definition(&ptr, fd)));
-	while (ft_definition(&ptr, fd) > 0)
+	while (num > 0)
 	{
+		num = ft_definition(&ptr, fd);
+		ft_putnbr(num);
 		tmp = ptr;
 		ptr = ptr->next;
 		ptr = ft_newtetr(SIZE, COORD);
@@ -130,7 +132,7 @@ int             ft_validsquare(char *tetr)
 				continue ;
 		if (*(tetr - 1) != '.' && *(tetr - 1) != '#')
 				return (-1);
-		if (*tetr == '#')
+		if (*(tetr - 1) == '#')
 			k++;
 		i++;
 	}
@@ -167,25 +169,28 @@ int		ft_binarysquare(char *tetr, t_tetr **ptr)
 	return (1);
 }
 
-int		ft_valid_tetr(int *mas)
+int        adjacency_counter(int *buf)
 {
-	int i;
-	int j;
-
-	i = 0;
-	while (i < SIZE / 4)
-	{
-		j = 0;
-		while (j < SIZE / 4)
-		{
-			if ((i - 1) > 0)
-				if (mas[K(i, j)] == mas[K(i - 1, j)])
-				;
-			j++;
-		}
-		i++;
-	}
-	return (1);
+    int i;
+    int count;
+    i = 0;
+    count = 0;
+    while (i < 19)
+    {
+        if (buf[i] == 1)
+        {
+            if (i + 1 <= 18 && buf[i + 1] == 1)
+                count++;
+            if (i - 1 >= 0 && buf[i - 1] == 1)
+                count++;
+            if (i + 5 <= 18 && buf[i + 5] == 1)
+                count++;
+            if (i - 5 >= 0 && buf[i - 5] == 1)
+                count++;
+        }
+        i++;
+    }
+    return (count == 6 || count == 8);
 }
 
 int		ft_definition(t_tetr **ptr, int fd)
@@ -207,6 +212,8 @@ int		ft_definition(t_tetr **ptr, int fd)
 	if (ft_binarysquare(c, ptr) == -1)
 		return (ft_newstrdel(&c));
 	(*ptr)->coords = ft_shift((*ptr)->coords);
+	if (adjacency_counter((*ptr)->line) > 0)
+		return (ft_newstrdel(&c));
 	ft_newstrdel(&c);
 	return (num);
 }
