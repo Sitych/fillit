@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/15 19:24:01 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/17 21:13:11 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ int					ft_validsquare(char *tetr);
 int					ft_binarysquare(char *tetr, t_tetr **ptr);
 int					ft_definition(t_tetr **ptr, int fd);
 int					*ft_shift(int *mas);
+int					adjacency_counter(int *buf);
 
 #endif

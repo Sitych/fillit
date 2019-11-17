@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/15 19:31:22 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/17 21:32:25 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,26 @@ int main(int ac, char **av)
 	num = 1;
 	ptr = ft_newtetr(SIZE, COORD);
 	// printf("%d", (ft_definition(&ptr, fd)));
-	while (num > 0)
+	while (ft_definition(&ptr, fd) > 0)
 	{
-		num = ft_definition(&ptr, fd);
-		ft_putnbr(num);
+		//ft_putnbr(num);
 		tmp = ptr;
 		ptr = ptr->next;
 		ptr = ft_newtetr(SIZE, COORD);
 		ptr->prev = tmp;
 	}
+	// int mas[19] = {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0};
 
 	while (1)
 	{
 		ft_putnubrs(ptr->line, SIZE);
 		ft_putchar('\n');
+		printf("valid tetr = %d\n", adjacency_counter(ptr->line));
 		if (ptr->prev == NULL)
 			break ;
 		ptr = ptr->prev;
 	}
+
 	// ptr->next = ft_newtetr(SIZE, COORD);
 	// ft_putnbr(ft_definition(&ptr, fd));
 	// ft_putchar('\n');
@@ -173,6 +175,7 @@ int        adjacency_counter(int *buf)
 {
     int i;
     int count;
+
     i = 0;
     count = 0;
     while (i < 19)
@@ -183,13 +186,14 @@ int        adjacency_counter(int *buf)
                 count++;
             if (i - 1 >= 0 && buf[i - 1] == 1)
                 count++;
-            if (i + 5 <= 18 && buf[i + 5] == 1)
+            if (i + 4 <= 18 && buf[i + 4] == 1)
                 count++;
-            if (i - 5 >= 0 && buf[i - 5] == 1)
+            if (i - 4 >= 0 && buf[i - 4] == 1)
                 count++;
         }
         i++;
     }
+	printf("count = %d ", count);
     return (count == 6 || count == 8);
 }
 
@@ -212,8 +216,9 @@ int		ft_definition(t_tetr **ptr, int fd)
 	if (ft_binarysquare(c, ptr) == -1)
 		return (ft_newstrdel(&c));
 	(*ptr)->coords = ft_shift((*ptr)->coords);
-	if (adjacency_counter((*ptr)->line) > 0)
-		return (ft_newstrdel(&c));
+	// printf("\n valid tetr = %d\n", adjacency_counter((*ptr)->line));
+	// if (adjacency_counter((*ptr)->line) != 0)
+	// 	return (ft_newstrdel(&c));
 	ft_newstrdel(&c);
 	return (num);
 }
