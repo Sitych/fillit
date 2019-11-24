@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/17 21:32:25 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/24 11:59:09 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 //     ['x'] = ft_print_x,
 //     ['X'] = ft_print_bigx,
 // };
+
+unsigned int ft_to_binary(int *mas);
 
 void	ft_print(int *mas, int len)
 {
@@ -65,18 +67,20 @@ int main(int ac, char **av)
 		ptr = ft_newtetr(SIZE, COORD);
 		ptr->prev = tmp;
 	}
-	// int mas[19] = {1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0};
-
 	while (1)
 	{
 		ft_putnubrs(ptr->line, SIZE);
 		ft_putchar('\n');
 		printf("valid tetr = %d\n", adjacency_counter(ptr->line));
+		printf("kek %x \n", ft_to_binary(ptr->line));
 		if (ptr->prev == NULL)
 			break ;
 		ptr = ptr->prev;
 	}
-
+	
+	unsigned int b;
+	b = 0b1000100010001000;  // Или любое другое
+	printf("\n");
 	// ptr->next = ft_newtetr(SIZE, COORD);
 	// ft_putnbr(ft_definition(&ptr, fd));
 	// ft_putchar('\n');
@@ -171,7 +175,58 @@ int		ft_binarysquare(char *tetr, t_tetr **ptr)
 	return (1);
 }
 
-int        adjacency_counter(int *buf)
+int			adjacency_counter2(unsigned int b)
+{
+	int				count;
+	int				i;
+	unsigned int	tmp;
+
+	count = 0;
+	i = 0;
+	tmp = b;
+	while (tmp != 0)
+	{
+		if (tmp & 0x80000000)
+		{
+			if (tmp & 0x40000000)
+				count++;
+			if (tmp & 0x08000000)
+				count++;
+			if (i > 0 && (b << (i - 1) & 0x80000000))
+				count++;
+			if (i > 4 && (b << (i - 4) & 0x80000000))
+				count++;
+		}
+		i++;
+		tmp = tmp << 1;
+	}
+	return (count == 6 || count == 8);
+}
+
+
+/* dont work*/
+unsigned int ft_to_binary(int *mas)
+{
+	int i;
+	unsigned int b;
+
+	i = 0;
+	b = 0;
+	while (i < SIZE)
+	{
+		if (mas[i] == 1)
+		{
+			b = b | 1;
+			b = b << 1;
+		}
+		else
+			b = b << 1;
+		i++;
+	}
+	return (b);
+}
+
+int			adjacency_counter(int *buf)
 {
     int i;
     int count;
@@ -216,6 +271,7 @@ int		ft_definition(t_tetr **ptr, int fd)
 	if (ft_binarysquare(c, ptr) == -1)
 		return (ft_newstrdel(&c));
 	(*ptr)->coords = ft_shift((*ptr)->coords);
+
 	// printf("\n valid tetr = %d\n", adjacency_counter((*ptr)->line));
 	// if (adjacency_counter((*ptr)->line) != 0)
 	// 	return (ft_newstrdel(&c));
