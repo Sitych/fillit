@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_tetr_func.c                                      :+:      :+:    :+:   */
+/*   map_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/28 20:14:59 by qjosmyn          ###   ########.fr       */
+/*   Created: 2019/11/28 20:18:05 by qjosmyn           #+#    #+#             */
+/*   Updated: 2019/11/28 20:29:02 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-
-t_tetr 	*ft_newtetr()
+int		ft_sqrt(int nb)
 {
-	t_tetr	*ptr;
+	int i;
 
-	ptr = (t_tetr*)malloc(sizeof(t_tetr));
-	if (ptr == NULL)
-		return (NULL);
-	ptr->line = 0;
-	ptr->next = NULL;
-	ptr->prev = NULL;
-	return (ptr);
-}
-
-size_t	ft_listlen(t_tetr *ptr)
-{
-	size_t	len;
-
-	len = 1;
-	while (ptr != NULL)
+	i = 1;
+	while (i < 2147483647)
 	{
-		len++;
-		ptr = ptr->next;
+		if ((i * i) < nb)
+			i++;
+		else if ((i * i) >= nb)
+			return (i);
 	}
-	return (len);
+	return (0);
 }
