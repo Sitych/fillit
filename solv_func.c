@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_tetr_func.c                                      :+:      :+:    :+:   */
+/*   solv_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/29 20:04:10 by qjosmyn          ###   ########.fr       */
+/*   Created: 2019/11/29 17:26:38 by qjosmyn           #+#    #+#             */
+/*   Updated: 2019/11/29 22:08:33 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-t_tetr 	*ft_newtetr(int byte, char c)
+uint16_t		*ft_mapcreate(int quantity)
 {
-	t_tetr	*ptr;
+	int			i;
+	uint16_t	*map;
 
-	ptr = (t_tetr*)malloc(sizeof(t_tetr));
-	if (ptr == NULL)
+	if ((map = (uint16_t*)malloc(sizeof(uint16_t) * (quantity + 1))) == NULL)
 		return (NULL);
-	ptr->line = byte;
-	ptr->c = c;
-	ptr->next = NULL;
-	ptr->prev = NULL;
-	return (ptr);
-}
-
-int		ft_listlen(t_tetr *ptr)
-{
-	int	len;
-
-	len = 1;
-	while (ptr != NULL)
-	{
-		len++;
-		ptr = ptr->next;
-	}
-	return (len);
+	i = 0;
+	printf("%d\n", quantity);
+	while (i < (quantity))
+		map[i++] = 1 << (sizeof(uint16_t) * 8 - quantity);
+	map[i] = 0xffff;
+	return (map);
 }

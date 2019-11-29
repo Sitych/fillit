@@ -6,9 +6,11 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 18:26:04 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/29 22:01:49 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/29 17:56:40 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 int             ft_validsquare(char *tetr)
 {
@@ -32,11 +34,11 @@ int             ft_validsquare(char *tetr)
 	return (1);
 }
 
-int			adjacency_counter(unsigned int b)
+uint16_t			adjacency_counter(uint16_t b)
 {
 	int				count;
 	int				i;
-	unsigned int	tmp;
+	uint16_t		tmp;
 
 	count = 0;
 	i = 0;
@@ -60,7 +62,7 @@ int			adjacency_counter(unsigned int b)
 	return (count == 6 || count == 8);
 }
 
-int		ft_shift(int byte)
+uint16_t		ft_shift(uint16_t byte)
 {
 	while ((byte & 0b1000100010001000) == 0)
 		byte = byte << 1;
@@ -69,25 +71,24 @@ int		ft_shift(int byte)
 	return (byte);
 }
 
-int		ft_binarysquare(char *tetr)
+int		ft_binarysquare(char *tetr, t_tetr **ptr)
 {
-	int	byte;
-
-	byte = 0;
+	if (*ptr == NULL)
+		return (-1);
 	while (*tetr)
 	{
-		byte = (*tetr == '#') ? (byte | 1) << 1 : byte << 1;
+		(*ptr)->line = (*tetr == '#') ? ((*ptr)->line | 1) << 1 : (*ptr)->line << 1;
 		tetr = (*(tetr + 1) == '\n') ? tetr + 2: tetr + 1;
 	}
-	byte = byte >> 1;
-	return (byte);
+	(*ptr)->line = (*ptr)->line >> 1;
+	return (1);
 }
 
-int		ft_definition(int *byte, int fd)
+int		ft_definition(t_tetr **ptr, int fd)
 {
-	char		*c;
-	char		r;
-	int			num;
+	char	*c;
+	char	r;
+	int		num;
 
 	c = ft_strnew(SIZE_R);
 	num = read(fd, c, SIZE_R);
@@ -99,11 +100,10 @@ int		ft_definition(int *byte, int fd)
 	num = read(fd, &r, 1);
 	if (r != '\n' && r != 0)
 		return (ft_newstrdel(&c));
-	if ((*byte = ft_binarysquare(c)) == -1)
+	if (ft_binarysquare(c, ptr) == -1)
 		return (ft_newstrdel(&c));
-	if (adjacency_counter(*byte) != 1)
+	if (adjacency_counter((*ptr)->line) != 1)
 		return (ft_newstrdel(&c));
-	*byte = ft_shift(*byte);
 	ft_newstrdel(&c);
 	return (num);
 }

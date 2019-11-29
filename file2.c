@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/28 20:30:25 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/29 22:05:42 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,38 @@ void	ft_print(int len, int i)
 
 int main(int ac, char **av)
 {
-	printf("%d\n", ft_sqrt(24));
-	ac = 1;
-	int fd = open(av[1], O_RDONLY);
-	
 	t_tetr	*ptr;
 	t_tetr	*tmp;
-	int num;
+	int		num;
+	char	c;
+	int		fd;
 
-	num = 1;
-	if (fd < 0)
+	if (ac != 2)
 		return (0);
-	ptr = ft_newtetr(SIZE, COORD);
-	while (ft_definition(&ptr, fd) > 0)
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0 || ft_definition(&num, fd) == -1)
+		return (0);
+	c = 'A';
+	ptr = ft_newtetr(num, c++);
+	while (ft_definition(&num, fd) > 0)
 	{
-		num++;
 		tmp = ptr;
+		ptr->next = ft_newtetr(num,c++);
 		ptr = ptr->next;
-		ptr = ft_newtetr(SIZE, COORD);
 		ptr->prev = tmp;
 	}
-	printf("len = %zu\n", ft_listlen(ptr));
+	num = 1;
 	while (1)
 	{
-		// printf("tetr = %x %d\n", ptr->line, ptr->line);
-		// ft_print(ptr->line, 0);
-		// ft_putchar('\n');
-		ptr->line = ft_shift(ptr->line);
-		// printf("shift byte =");
-		// ft_print(ptr->line, 0);
-		// ft_putchar('\n');
-		// printf("valid tetr = %d \n", adjacency_counter(ptr->line));
+		ft_print(ptr->line, 0);
+		ft_putchar('\n');
+		printf("valid tetr = %c \n", ptr->c);
 		if (ptr->prev == NULL)
 			break ;
 		ptr = ptr->prev;
+		num++;
 	}
+	printf("len = %d\n", ft_listlen(ptr));
 
 	ft_putnbr(num);
 	// int b;
