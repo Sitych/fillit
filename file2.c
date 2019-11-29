@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/29 22:05:42 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 02:31:02 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int ac, char **av)
 {
 	t_tetr	*ptr;
 	t_tetr	*tmp;
+	t_tetr	*start;
 	int		num;
 	char	c;
 	int		fd;
@@ -49,6 +50,7 @@ int main(int ac, char **av)
 		return (0);
 	c = 'A';
 	ptr = ft_newtetr(num, c++);
+	start = ptr;
 	while (ft_definition(&num, fd) > 0)
 	{
 		tmp = ptr;
@@ -56,6 +58,7 @@ int main(int ac, char **av)
 		ptr = ptr->next;
 		ptr->prev = tmp;
 	}
+	
 	num = 1;
 	while (1)
 	{

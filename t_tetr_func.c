@@ -6,20 +6,20 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/29 20:04:10 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 02:30:56 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetr 	*ft_newtetr(int byte, char c)
+t_tetr 	*ft_newtetr(int b, char c)
 {
 	t_tetr	*ptr;
 
 	ptr = (t_tetr*)malloc(sizeof(t_tetr));
 	if (ptr == NULL)
 		return (NULL);
-	ptr->line = byte;
+	ptr->line = b;
 	ptr->c = c;
 	ptr->next = NULL;
 	ptr->prev = NULL;
@@ -37,4 +37,11 @@ int		ft_listlen(t_tetr *ptr)
 		ptr = ptr->next;
 	}
 	return (len);
+}
+
+t_tetr    *ft_tostart(t_tetr *list)
+{
+	while (list->prev != NULL)
+		list = list->prev;
+	return (list);
 }

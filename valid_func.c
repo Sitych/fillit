@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 18:26:04 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/29 22:01:49 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 02:23:16 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int             ft_validsquare(char *tetr)
 	return (1);
 }
 
-int			adjacency_counter(unsigned int b)
+int			adjacency_counter(byte b)
 {
 	int				count;
 	int				i;
@@ -60,30 +60,30 @@ int			adjacency_counter(unsigned int b)
 	return (count == 6 || count == 8);
 }
 
-int		ft_shift(int byte)
+byte	ft_shift(byte b)
 {
-	while ((byte & 0b1000100010001000) == 0)
-		byte = byte << 1;
-	while ((byte & 0b1111000000000000) == 0)
-		byte = byte << 4;
-	return (byte);
+	while ((b & 0b1000100010001000) == 0)
+		b = b << 1;
+	while ((b & 0b1111000000000000) == 0)
+		b = b << 4;
+	return (b);
 }
 
-int		ft_binarysquare(char *tetr)
+byte	ft_binarysquare(char *tetr)
 {
-	int	byte;
+	int	b;
 
-	byte = 0;
+	b = 0;
 	while (*tetr)
 	{
-		byte = (*tetr == '#') ? (byte | 1) << 1 : byte << 1;
+		b = (*tetr == '#') ? (b | 1) << 1 : b << 1;
 		tetr = (*(tetr + 1) == '\n') ? tetr + 2: tetr + 1;
 	}
-	byte = byte >> 1;
-	return (byte);
+	b = b >> 1;
+	return ((byte)b);
 }
 
-int		ft_definition(int *byte, int fd)
+int		ft_definition(int *b, int fd)
 {
 	char		*c;
 	char		r;
@@ -99,11 +99,11 @@ int		ft_definition(int *byte, int fd)
 	num = read(fd, &r, 1);
 	if (r != '\n' && r != 0)
 		return (ft_newstrdel(&c));
-	if ((*byte = ft_binarysquare(c)) == -1)
+	if ((*b = ft_binarysquare(c)) == -1)
 		return (ft_newstrdel(&c));
-	if (adjacency_counter(*byte) != 1)
+	if (adjacency_counter(*b) != 1)
 		return (ft_newstrdel(&c));
-	*byte = ft_shift(*byte);
+	*b = ft_shift(*b);
 	ft_newstrdel(&c);
 	return (num);
 }
