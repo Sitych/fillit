@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 02:27:28 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 07:22:29 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ unsigned int		ft_to_binary(int *mas);
 int					adjacency_counter(byte b);
 byte				ft_shift(byte b);
 int					ft_listlen(t_tetr *ptr);
-byte				*ft_mapcreate(int quantity)
+byte				*ft_mapcreate(int quantity);
+int					ft_sqrt(int nb);
+int					ft_solve(t_tetr *ptr);
+byte				**ft_bytemaskcreate(t_tetr *ptr);
 
+
+
+void	ft_print(int len, int i);
 #endif

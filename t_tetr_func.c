@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 02:30:56 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 08:14:13 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_listlen(t_tetr *ptr)
 {
 	int	len;
 
-	len = 1;
+	len = 0;
 	while (ptr != NULL)
 	{
 		len++;

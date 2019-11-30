@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 02:31:02 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 08:07:03 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "t_tetr_func.c"
 #include "valid_func.c"
 #include "map_func.c"
+#include "solv_func.c"
 #include <stdio.h>
 
 void	ft_print(int len, int i)
@@ -58,21 +59,24 @@ int main(int ac, char **av)
 		ptr = ptr->next;
 		ptr->prev = tmp;
 	}
-	
-	num = 1;
-	while (1)
-	{
-		ft_print(ptr->line, 0);
-		ft_putchar('\n');
-		printf("valid tetr = %c \n", ptr->c);
-		if (ptr->prev == NULL)
-			break ;
-		ptr = ptr->prev;
-		num++;
-	}
-	printf("len = %d\n", ft_listlen(ptr));
+	ptr->next = ft_newtetr(num,c++);
+	ptr = ptr->next;
+	ptr = ft_tostart(ptr);
+	ft_solve(start);
+	// num = 1;
+	// while (1)
+	// {
+	// 	ft_print(ptr->line, 0);
+	// 	ft_putchar('\n');
+	// 	printf("valid tetr = %c \n", ptr->c);
+	// 	if (ptr->prev == NULL)
+	// 		break ;
+	// 	ptr = ptr->prev;
+	// 	num++;
+	// }
+	// printf("len = %d\n", ft_listlen(ptr));
 
-	ft_putnbr(num);
+	// ft_putnbr(num);
 	// int b;
 	// b = 0b1000100010001000;  // Или любое другое
 	// ft_putchar('\n');
