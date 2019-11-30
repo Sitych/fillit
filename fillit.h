@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 09:00:13 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 09:50:51 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int							ft_listlen(t_tetr *ptr);
 byte						*ft_mapcreate(int quantity);
 int							ft_sqrt(int nb);
 int							ft_solve(t_tetr *ptr, int len);
+byte						*ft_mapdup(byte *map, int len);
 
 
 

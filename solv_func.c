@@ -6,19 +6,15 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:26:38 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 09:15:47 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 11:54:31 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			ft_solve(t_tetr *ptr, int len)
+int			ft_kostyl(t_tetr ptr, int len)
 {
-	byte	*map;
 	
-	map = ft_mapcreate(len);
-	
-
 	int 	k;
 	int		j;
 	k = 0;
@@ -40,6 +36,27 @@ int			ft_solve(t_tetr *ptr, int len)
 		ft_print(map[k], 0);
 		ft_putchar('\n');
 		k++;
+	}
+}
+
+int			ft_solve(t_tetr *ptr, int len, byte *map)
+{
+	byte	*copymap;
+	int		i;
+	int		j;
+
+	copymap = ft_mapdup(map, len);
+	i = 0;
+	while (i < len)
+	{
+		j = i;
+		
+			while (j < i + 4)
+			{
+				map[j] = map[j] ^ ptr->line[j];
+				j++;
+			}
+		i++;
 	}
 	return (0);
 }
