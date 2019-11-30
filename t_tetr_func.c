@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 08:14:13 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 09:17:34 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 t_tetr 	*ft_newtetr(int b, char c)
 {
 	t_tetr	*ptr;
+	int		i;
 
-	ptr = (t_tetr*)malloc(sizeof(t_tetr));
-	if (ptr == NULL)
+	if ((ptr = (t_tetr*)malloc(sizeof(t_tetr))) == NULL)
 		return (NULL);
-	ptr->line = b;
+	i = 0;
+	if ((ptr->line = (byte*)malloc(sizeof(byte) * 4)) == NULL)
+			return (NULL);
+	while (i < 4)
+	{
+		ptr->line[i] = (b & (0xf000 >> (i * 4))) << (i * 4);
+		i++;
+	}
 	ptr->c = c;
 	ptr->next = NULL;
 	ptr->prev = NULL;

@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 08:07:03 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 09:01:41 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int ac, char **av)
 	ptr->next = ft_newtetr(num,c++);
 	ptr = ptr->next;
 	ptr = ft_tostart(ptr);
-	ft_solve(start);
+	ft_solve(start, 2 * ft_sqrt(ft_listlen(start)));
 	// num = 1;
 	// while (1)
 	// {

@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:18:05 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 08:13:34 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/11/30 08:52:44 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,4 @@ byte		*ft_mapcreate(int quantity)
 		map[i++] = 0xffff >> quantity;
 	map[i] = 0xffff;
 	return (map);
-}
-
-byte		**ft_bytemaskcreate(t_tetr *ptr)
-{
-	byte	**tetromino;
-	int		i;
-	int		j;
-	int		len;
-
-	len = ft_listlen(ptr);
-	if ((tetromino = (byte**)malloc(sizeof(byte*) * len)) == NULL)
-		return (NULL);
-	j = 0;
-	while (ptr != NULL)
-	{
-		i = 0;
-		if ((tetromino[j] = (byte*)malloc(sizeof(byte) * 4)) == NULL)
-			return (NULL);
-		while (i < 4)
-		{
-			tetromino[j][i] = (ptr->line & (0xf000 >> (i * 4))) << (i * 4);
-			i++;
-		}
-		j++;
-		ptr = ptr->next;
-	}
-	return (tetromino);
 }
