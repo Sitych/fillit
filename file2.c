@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 09:27:55 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/08 07:50:15 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "map_func.c"
 #include "solv_func.c"
 #include <stdio.h>
+#include "solver.c"
 
 void	ft_print(int len, int i)
 {
@@ -62,7 +63,10 @@ int main(int ac, char **av)
 	ptr->next = ft_newtetr(num,c++);
 	ptr = ptr->next;
 	
-	ft_solve(start, 2 * ft_sqrt(ft_listlen(start)));
+	byte *map;
+	map = ft_mapcreate(4);
+	printf("RESULT = %d\n", ft_solver(start, map, 4));
+	
 	// num = 1;
 	// while (1)
 	// {

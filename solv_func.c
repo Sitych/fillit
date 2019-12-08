@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   solv_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:26:38 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 11:54:31 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/08 07:51:16 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "fillit.h"
 
 int			ft_kostyl(t_tetr ptr, int len)
@@ -59,4 +60,4 @@ int			ft_solve(t_tetr *ptr, int len, byte *map)
 		i++;
 	}
 	return (0);
-}
+}*/
