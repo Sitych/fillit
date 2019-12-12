@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 18:26:04 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 02:23:16 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/12 01:28:02 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,15 @@ int		ft_definition(int *b, int fd)
 	if (num < 0)
 		return (ft_newstrdel(&c));
 	c[SIZE_R] = 0;
-	if (ft_validsquare(c) == -1)
-		return (ft_newstrdel(&c));
+	// if (ft_validsquare(c) == -1)
+	// 	return (ft_newstrdel(&c));
 	num = read(fd, &r, 1);
 	if (r != '\n' && r != 0)
 		return (ft_newstrdel(&c));
 	if ((*b = ft_binarysquare(c)) == -1)
 		return (ft_newstrdel(&c));
-	if (adjacency_counter(*b) != 1)
-		return (ft_newstrdel(&c));
+	// if (adjacency_counter(*b) != 1)
+	// 	return (ft_newstrdel(&c));
 	*b = ft_shift(*b);
 	ft_newstrdel(&c);
 	return (num);

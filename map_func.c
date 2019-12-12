@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:18:05 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 09:50:10 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/12 01:39:50 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ byte		*ft_mapdup(byte *map, int len)
 	if ((copymap = (byte*)malloc(sizeof(byte) * len)) == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i <= len)
 	{
 		copymap[i] = map[i];
 		i++;

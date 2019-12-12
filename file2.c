@@ -6,7 +6,7 @@
 /*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/08 07:50:15 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/12 04:59:51 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int main(int ac, char **av)
 		ptr = ptr->next;
 		ptr->prev = tmp;
 	}
+
 	ptr->next = ft_newtetr(num,c++);
 	ptr = ptr->next;
-	
+	ptr = ft_tostart(ptr);
 	byte *map;
 	map = ft_mapcreate(4);
 	printf("RESULT = %d\n", ft_solver(start, map, 4));
-	
 	// num = 1;
 	// while (1)
 	// {
