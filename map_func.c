@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   map_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:18:05 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/12 01:39:50 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/14 23:03:16 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int		ft_sqrt(int nb)
+int     ft_mapcheck(byte *old_map, byte *new_map, int len)
 {
-	int i;
+    int		i;
 
-	i = 1;
-	while (i < 2147483647)
-	{
-		if ((i * i) < nb)
-			i++;
-		else if ((i * i) >= nb)
-			return (i);
-	}
-	return (0);
+    i = 0;
+    while (i <= len)
+    {
+		if ((old_map[i] & new_map[i]) != old_map[i])
+			return (0);
+		i++;
+    }
+	return (1);
 }
 
 byte		*ft_mapcreate(int quantity)
@@ -56,4 +55,30 @@ byte		*ft_mapdup(byte *map, int len)
 		i++;
 	}
 	return (copymap);
+}
+
+byte		*ft_mapcopy(byte *map, byte *old_map, int len)
+{
+	int		i;
+
+	i = 0;
+	while (i <= len)
+	{
+		map[i] = old_map[i];
+		i++;
+	}
+	return (map);
+}
+
+byte		*ft_xormap(byte *map, t_tetr *ptr, int row)
+{
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		map[row + i] = map[row + i] ^ ptr->line[i];
+		i++;
+	}
+	return (map);
 }

@@ -6,13 +6,13 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/11/30 09:17:34 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/14 23:02:05 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetr 	*ft_newtetr(int b, char c)
+t_tetr 		*ft_newtetr(int b, char c)
 {
 	t_tetr	*ptr;
 	int		i;
@@ -21,7 +21,7 @@ t_tetr 	*ft_newtetr(int b, char c)
 		return (NULL);
 	i = 0;
 	if ((ptr->line = (byte*)malloc(sizeof(byte) * 4)) == NULL)
-			return (NULL);
+		return (NULL);
 	while (i < 4)
 	{
 		ptr->line[i] = (b & (0xf000 >> (i * 4))) << (i * 4);
@@ -33,7 +33,7 @@ t_tetr 	*ft_newtetr(int b, char c)
 	return (ptr);
 }
 
-int		ft_listlen(t_tetr *ptr)
+int			ft_listlen(t_tetr *ptr)
 {
 	int	len;
 
@@ -46,7 +46,31 @@ int		ft_listlen(t_tetr *ptr)
 	return (len);
 }
 
-t_tetr    *ft_tostart(t_tetr *list)
+t_tetr		*ft_shift_tetr(t_tetr *tmp, int direction, int quantity)
+{
+	int		i;
+
+	i = 0;
+	if (direction == 1)
+	{
+		while (i < 4)
+		{
+			tmp->line[i] = tmp->line[i] >> quantity;
+			i++;
+		}
+	}
+	else
+	{
+		while (i < 4)
+		{
+			tmp->line[i] = tmp->line[i] << quantity;
+			i++;
+		}
+	}
+	return (tmp);
+}
+
+t_tetr		*ft_tostart(t_tetr *list)
 {
 	while (list->prev != NULL)
 		list = list->prev;

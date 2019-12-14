@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/12 04:59:51 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/14 23:55:16 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "t_tetr_func.c"
 #include "valid_func.c"
 #include "map_func.c"
-#include "solv_func.c"
 #include <stdio.h>
 #include "solver.c"
 
@@ -44,6 +43,8 @@ int main(int ac, char **av)
 	int		num;
 	char	c;
 	int		fd;
+	int len;
+	int i;
 
 	if (ac != 2)
 		return (0);
@@ -65,8 +66,22 @@ int main(int ac, char **av)
 	ptr = ptr->next;
 	ptr = ft_tostart(ptr);
 	byte *map;
-	map = ft_mapcreate(4);
-	printf("RESULT = %d\n", ft_solver(start, map, 4));
+	len = ft_sqrt(ft_listlen(start) * 4);
+	map = ft_mapcreate(len);
+	ptr = start;
+	while (!ft_solver(start, map, len))
+	{
+		i = 0;
+		// while (i < len)
+		// {
+		// 	free((&map[i]);
+		// 	i++;
+		// }
+		len++;
+		map = ft_mapcreate(len);
+		ptr = start;
+	}
+	// printf("RESULT = %d\n", ft_solver(start, map, 5));
 	// num = 1;
 	// while (1)
 	// {
