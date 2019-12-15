@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 01:06:08 by rretta            #+#    #+#             */
-/*   Updated: 2019/12/15 00:02:36 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/15 23:20:15 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ int     ft_solver(t_tetr *ptr, byte *map, int len)
 		{
 			row++;
 		}
-		else if (ft_solver(ptr->next, map, len) == 1)
+		else 
+			if (ft_solver(ptr->next, map, len) == 1)
 				return (1);
-		else
-			return (0);
 	}
 	return (0);
 }
@@ -68,7 +67,7 @@ int		ft_place(byte **map, t_tetr *ptr, int len, int row)
 		// printf("\n");
 		if (ft_mapcheck(old_map, *map, len) == 1)
 		{
-			ptr = ft_shift_tetr(ptr, -1, len);
+			ptr = ft_shift_tetr(ptr, -1, i);
 			return (1);
 		}
 		*map = ft_mapcopy(*map, old_map, len);
