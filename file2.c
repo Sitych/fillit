@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/14 23:55:16 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/21 00:51:05 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int main(int ac, char **av)
 	char	c;
 	int		fd;
 	int len;
-	int i;
 
 	if (ac != 2)
 		return (0);
@@ -61,46 +60,35 @@ int main(int ac, char **av)
 		ptr = ptr->next;
 		ptr->prev = tmp;
 	}
-
 	ptr->next = ft_newtetr(num,c++);
 	ptr = ptr->next;
-	ptr = ft_tostart(ptr);
+
 	byte *map;
 	len = ft_sqrt(ft_listlen(start) * 4);
 	map = ft_mapcreate(len);
 	ptr = start;
 	while (!ft_solver(start, map, len))
 	{
-		i = 0;
-		// while (i < len)
-		// {
-		// 	free((&map[i]);
-		// 	i++;
-		// }
+		ptr = start;
+		while (ptr != NULL)
+		{
+			ptr->tetromin = ft_null_tetramin(ptr->tetromin);
+			ptr = ptr->next;
+		}
 		len++;
 		map = ft_mapcreate(len);
 		ptr = start;
 	}
-	// printf("RESULT = %d\n", ft_solver(start, map, 5));
-	// num = 1;
-	// while (1)
-	// {
-	// 	ft_print(ptr->line, 0);
-	// 	ft_putchar('\n');
-	// 	printf("valid tetr = %c \n", ptr->c);
-	// 	if (ptr->prev == NULL)
-	// 		break ;
-	// 	ptr = ptr->prev;
-	// 	num++;
-	// }
-	// printf("len = %d\n", ft_listlen(ptr));
+	ptr = start;
+	ft_putstr("START\n");
+	while (ptr != NULL)
+	{
+		ft_printmap(ptr->tetromin, 13);
+		printf("\n");
+		ptr = ptr->next;
+	}
+	//	ft_print_tetr(start, len);
 
-	// ft_putnbr(num);
-	// int b;
-	// b = 0b1000100010001000;  // Или любое другое
-	// ft_putchar('\n');
-	// ft_print(b);
-	
 	close(fd);
 	return (1);
 }

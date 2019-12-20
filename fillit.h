@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/14 22:11:01 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/21 00:49:55 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct				s_tetr
 {
 	byte					*line;
 	char					c;
+	byte					*tetromin;
 	struct s_tetr			*next;
 	struct s_tetr			*prev;
 }							t_tetr;
@@ -50,6 +51,10 @@ t_tetr						*ft_shift_tetr(t_tetr *tmp, int direction, int quantity);
 byte						*ft_mapcopy(byte *map, byte *old_map, int len);
 byte						*ft_xormap(byte *map, t_tetr *ptr, int row);
 int							ft_sqrt(int nb);
+byte						*ft_null_tetramin(byte *tetramin);
+char						**ft_charmapcreate(void);
+int		ft_print_tetr(t_tetr *ptr, int len);
+char		**ft_charmapcreate(int len);
 
 void	ft_print(int len, int i);
 #endif

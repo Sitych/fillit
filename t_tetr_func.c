@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/14 23:02:05 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/20 23:53:25 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ t_tetr 		*ft_newtetr(int b, char c)
 
 	if ((ptr = (t_tetr*)malloc(sizeof(t_tetr))) == NULL)
 		return (NULL);
-	i = 0;
 	if ((ptr->line = (byte*)malloc(sizeof(byte) * 4)) == NULL)
 		return (NULL);
+	if ((ptr->tetromin = (byte*)malloc(sizeof(byte) * 16)) == NULL)
+		return (NULL);
+	ptr->tetromin = ft_null_tetramin(ptr->tetromin);
+	i = 0;
 	while (i < 4)
 	{
 		ptr->line[i] = (b & (0xf000 >> (i * 4))) << (i * 4);
@@ -70,9 +73,15 @@ t_tetr		*ft_shift_tetr(t_tetr *tmp, int direction, int quantity)
 	return (tmp);
 }
 
-t_tetr		*ft_tostart(t_tetr *list)
+byte		*ft_null_tetramin(byte *tetramin)
 {
-	while (list->prev != NULL)
-		list = list->prev;
-	return (list);
+	int i;
+
+	i = 0;
+	while (i < 16)
+	{
+		tetramin[i] = 0;
+		i++;
+	}
+	return (tetramin);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 01:06:08 by rretta            #+#    #+#             */
-/*   Updated: 2019/12/15 23:20:15 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/21 00:07:53 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int     ft_solver(t_tetr *ptr, byte *map, int len)
 int		ft_place(byte **map, t_tetr *ptr, int len, int row)
 {
     int		i;
+	int		j;
 	byte	*old_map;
 
 	old_map = ft_mapdup(*map, len);
@@ -67,6 +68,12 @@ int		ft_place(byte **map, t_tetr *ptr, int len, int row)
 		// printf("\n");
 		if (ft_mapcheck(old_map, *map, len) == 1)
 		{
+			j = 0;
+			while (j < 4)
+			{
+				ptr->tetromin[row + j] = ptr->line[j];
+				j++;
+			}
 			ptr = ft_shift_tetr(ptr, -1, i);
 			return (1);
 		}
