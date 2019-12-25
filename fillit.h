@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/21 00:49:55 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/25 22:22:30 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define FILLIT_H
 
 # include "libft/libft.h"
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h> //TO DELETE!!!!!!!!!!!!!!!!
+# include <stdlib.h>
 
 # define SIZE	16
 # define SIZE_R	20
@@ -52,9 +59,10 @@ byte						*ft_mapcopy(byte *map, byte *old_map, int len);
 byte						*ft_xormap(byte *map, t_tetr *ptr, int row);
 int							ft_sqrt(int nb);
 byte						*ft_null_tetramin(byte *tetramin);
-char						**ft_charmapcreate(void);
-int		ft_print_tetr(t_tetr *ptr, int len);
+void		ft_print_tetr(t_tetr *ptr, int len);
 char		**ft_charmapcreate(int len);
+char		**ft_charmap(int len);
+void     ft_printer(t_tetr *tetr, int len, char **map);
 
 void	ft_print(int len, int i);
 #endif

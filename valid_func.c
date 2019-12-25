@@ -6,9 +6,11 @@
 /*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 18:26:04 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/12 01:28:02 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/25 22:16:39 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 int             ft_validsquare(char *tetr)
 {

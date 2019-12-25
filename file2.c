@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/21 00:51:05 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/25 22:30:28 by rretta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "t_tetr_func.c"
-#include "valid_func.c"
-#include "map_func.c"
 #include <stdio.h>
-#include "solver.c"
 
 void	ft_print(int len, int i)
 {
@@ -81,14 +77,17 @@ int main(int ac, char **av)
 	}
 	ptr = start;
 	ft_putstr("START\n");
+	printf("%d\n", len);
 	while (ptr != NULL)
 	{
-		ft_printmap(ptr->tetromin, 13);
+		ft_printmap(ptr->tetromin, len);
 		printf("\n");
 		ptr = ptr->next;
 	}
-	//	ft_print_tetr(start, len);
 
+	//ft_print_tetr(start, len);
+	ft_printer(start, len, ft_charmap(len));
+	//ft_charmap(len);
 	close(fd);
 	return (1);
 }
