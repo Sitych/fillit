@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   map_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:18:05 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/25 22:16:47 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/30 19:36:21 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int     ft_mapcheck(byte *old_map, byte *new_map, int len)
+int     ft_mapcheck(byte *map, t_tetr *ptr, int len)
 {
     int		i;
 
     i = 0;
-    while (i <= len)
+    while (i < len)
     {
-		if ((old_map[i] & new_map[i]) != old_map[i])
+		if ((map[i] & ptr->tetromin[i]) != 0)
 			return (0);
 		i++;
     }
@@ -70,14 +70,14 @@ byte		*ft_mapcopy(byte *map, byte *old_map, int len)
 	return (map);
 }
 
-byte		*ft_xormap(byte *map, t_tetr *ptr, int row)
+byte		*ft_xormap(byte *map, t_tetr *ptr, int len)
 {
 	int		i;
 
 	i = 0;
-	while (i < 4)
+	while (i < len)
 	{
-		map[row + i] = map[row + i] ^ ptr->line[i];
+		map[i] = map[i] ^ ptr->tetromin[i];
 		i++;
 	}
 	return (map);

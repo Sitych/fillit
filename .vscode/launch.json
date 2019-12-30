@@ -9,7 +9,7 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/a.out",
+			"program": "${workspaceFolder}/fillit",
 			"args": ["v2"],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",

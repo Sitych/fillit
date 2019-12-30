@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/08 01:06:08 by rretta            #+#    #+#             */
-/*   Updated: 2019/12/25 22:16:44 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/30 20:06:20 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,62 +27,54 @@ void	ft_printmap(byte *map, int len)
 
 int     ft_solver(t_tetr *ptr, byte *map, int len)
 {
-	ft_printmap(map, len);
-	printf("\n");
 	if (ptr == NULL)
 		return (1);
-	int		row;
-	int		c;
 
-	
+	int		row;
+	int		col;
+	byte	tmp;
+	int		i;
+
 	row = 0;
-	c = 0;
+	col = 0;
 	while (row < len)
 	{
-		if (ft_place(&map, ptr, len, row) == 0)
+		col = 0;
+		while (col < len)
 		{
-			row++;
-		}
-		else 
-			if (ft_solver(ptr->next, map, len) == 1)
-				return (1);
-	}
-	return (0);
-}
-
-int		ft_place(byte **map, t_tetr *ptr, int len, int row)
-{
-    int		i;
-	int		j;
-	byte	*old_map;
-
-	old_map = ft_mapdup(*map, len);
-	i = 0;
-	while (i < len)
-	{
-		*map = ft_xormap(*map, ptr, row);
-		// printf("map\n");
-		// ft_printmap(*map, len);
-		// printf("\nold_map\n");
-		// ft_printmap(old_map, len);
-		// printf("\n");
-		if (ft_mapcheck(old_map, *map, len) == 1)
-		{
-			j = 0;
-			while (j < 4)
+			if (ft_mapcheck(map, ptr, len) == 1)
 			{
-				ptr->tetromin[row + j] = ptr->line[j];
-				j++;
+				map = ft_xormap(map, ptr, len);
+				if (ft_solver(ptr->next, map, len))
+					return (1);
+				map = ft_xormap(map, ptr, len);
 			}
-			ptr = ft_shift_tetr(ptr, -1, i);
-			return (1);
+			ptr = ft_shift_tetr(ptr, 1, 1, len);
+			col++;
+			printf("\nshift right\n");
+			ft_printmap(ptr->tetromin, len);
+			ft_putchar('\n');
 		}
-		*map = ft_mapcopy(*map, old_map, len);
-		ptr = ft_shift_tetr(ptr, 1, 1);
+		ptr = ft_shift_tetr(ptr, -1, len, len);
+		i = len;
+		while (i >= 1)
+		{
+			ptr->tetromin[i] = ptr->tetromin[i - 1];
+			i--;
+		}
+		ptr->tetromin[i] = 0;
+		row++;
+		printf("\nshift down\n");
+		ft_printmap(ptr->tetromin, len);
+		ft_putchar('\n');
+	}
+	ptr->tetromin = ft_null_tetramin(ptr->tetromin);
+	i = 0;
+	while (i < 4)
+	{
+		ptr->tetromin[i] = ptr->line[i];
 		i++;
 	}
-	ptr = ft_shift_tetr(ptr, -1, len);
-	/*ft_freemap(new_map);*/
 	return (0);
 }
 

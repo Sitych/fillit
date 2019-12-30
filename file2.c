@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:31:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/25 22:30:28 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/30 19:38:45 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,19 @@ int main(int ac, char **av)
 	len = ft_sqrt(ft_listlen(start) * 4);
 	map = ft_mapcreate(len);
 	ptr = start;
-	while (!ft_solver(start, map, len))
-	{
-		ptr = start;
-		while (ptr != NULL)
-		{
-			ptr->tetromin = ft_null_tetramin(ptr->tetromin);
-			ptr = ptr->next;
-		}
-		len++;
-		map = ft_mapcreate(len);
-		ptr = start;
-	}
+	ft_solver(start, map, len);
+	// while (!)
+	// {
+	// 	ptr = start;
+	// 	while (ptr != NULL)
+	// 	{
+	// 		ptr->tetromin = ft_null_tetramin(ptr->tetromin);
+	// 		ptr = ptr->next;
+	// 	}
+	// 	len++;
+	// 	map = ft_mapcreate(len);
+	// 	ptr = start;
+	// }
 	ptr = start;
 	ft_putstr("START\n");
 	printf("%d\n", len);

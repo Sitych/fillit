@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rretta <rretta@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:07:16 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/25 22:22:30 by rretta           ###   ########.fr       */
+/*   Updated: 2019/12/30 19:37:53 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ byte						*ft_mapcreate(int quantity);
 int							ft_sqrt(int nb);
 int							ft_solve(t_tetr *ptr, int len);
 byte						*ft_mapdup(byte *map, int len);
-int     					ft_mapcheck(byte *old_map, byte *new_map, int len);
+int     					ft_mapcheck(byte *map, t_tetr *ptr, int row);
 int							ft_place(byte **map, t_tetr *ptr, int len, int row);
 int     					ft_solver(t_tetr *ptr, byte *map, int len);
-t_tetr						*ft_shift_tetr(t_tetr *tmp, int direction, int quantity);
+t_tetr						*ft_shift_tetr(t_tetr *tmp, int direction, int quantity, int len);
 byte						*ft_mapcopy(byte *map, byte *old_map, int len);
-byte						*ft_xormap(byte *map, t_tetr *ptr, int row);
+byte						*ft_xormap(byte *map, t_tetr *ptr, int len);
 int							ft_sqrt(int nb);
 byte						*ft_null_tetramin(byte *tetramin);
 void		ft_print_tetr(t_tetr *ptr, int len);
 char		**ft_charmapcreate(int len);
 char		**ft_charmap(int len);
 void     ft_printer(t_tetr *tetr, int len, char **map);
+void	ft_printmap(byte *map, int len);
 
 void	ft_print(int len, int i);
 #endif

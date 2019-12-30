@@ -6,7 +6,7 @@
 /*   By: qjosmyn <qjosmyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 20:28:21 by qjosmyn           #+#    #+#             */
-/*   Updated: 2019/12/20 23:53:25 by qjosmyn          ###   ########.fr       */
+/*   Updated: 2019/12/30 19:28:06 by qjosmyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ t_tetr 		*ft_newtetr(int b, char c)
 		ptr->line[i] = (b & (0xf000 >> (i * 4))) << (i * 4);
 		i++;
 	}
+	i = 0;
+	while (i < 4)
+	{
+		ptr->tetromin[i] = ptr->line[i];
+		i++;
+	}
 	ptr->c = c;
 	ptr->next = NULL;
 	ptr->prev = NULL;
@@ -49,24 +55,24 @@ int			ft_listlen(t_tetr *ptr)
 	return (len);
 }
 
-t_tetr		*ft_shift_tetr(t_tetr *tmp, int direction, int quantity)
+t_tetr		*ft_shift_tetr(t_tetr *tmp, int direction, int quantity, int len)
 {
 	int		i;
 
 	i = 0;
 	if (direction == 1)
 	{
-		while (i < 4)
+		while (i < len)
 		{
-			tmp->line[i] = tmp->line[i] >> quantity;
+			tmp->tetromin[i] = tmp->tetromin[i] >> quantity;
 			i++;
 		}
 	}
 	else
 	{
-		while (i < 4)
+		while (i < len)
 		{
-			tmp->line[i] = tmp->line[i] << quantity;
+			tmp->tetromin[i] = tmp->tetromin[i] << quantity;
 			i++;
 		}
 	}
